@@ -20,7 +20,7 @@ using namespace std;
 int main()
 {
 	int guess;
-	char  arr  [] = "No winter lasts forever; no spring skips its turn.";
+	char  arr[] = "No winter lasts forever; no spring skips its turn.";
 
 	srand(time(NULL));
 
@@ -51,44 +51,60 @@ int main()
 	//Message without altering
 	b = compress(arr);
 	unsigned short * d = &b[0];
-	ret = chkSum(d, sizeof(b)/  sizeof(b[0]));
-	cout << "Checksum of original message:  " << ret << endl;
+	ret = chkSum(d, b.size());
+	cout << "Checksum of original message:  " << hex << ret << endl;
 
+	/*
+	for (int i = 0; i < b.size(); i++)
+	{
+		cout << d[i] << endl;
 
+	}*/
 	//cout << guess << endl;
 
 
-	//Pick a number randomly
-	guess = rand() % sizeof(b) / sizeof(b[0]) + 1;
+
+	guess = rand() % strlen(arr) ;
+	//cout << arr[guess] << endl;
 	//Alter one bit, randomly
 
 	strcpy_s(arr, msgErr(arr, 1, guess));
 	cout << arr << endl;
 	b = compress(arr);
+
+
 	d = &b[0];
-	ret = chkSum(d, sizeof(b) / sizeof(b[0]));
-	cout << "Checksum: " << ret << endl;
+
+	//cout << d << endl;
+	//cout << b << endl;
+	
+	ret = chkSum(d, b.size());
+	cout << "Checksum: " << hex << ret << endl;
+
+
+	//cout << sizeof(d) << endl;
 
 	//Pick a number randomly
-	guess = rand() % sizeof(b) / sizeof(b[0]) + 1;
+	guess = rand() % strlen(arr) ;
 	//3 bits
 	strcpy_s(arr, msgErr(arr, 3, guess));
 	cout << arr << endl;
 	b = compress(arr);
 	d = &b[0];
-	ret = chkSum(d, sizeof(b) / sizeof(b[0]));
-	cout << "Checksum: " << ret << endl;
+	ret = chkSum(d, b.size());
+	cout << "Checksum: " << hex << ret << endl;
+
 
 
 	//Pick a number randomly
-	guess = rand() % sizeof(b) / sizeof(b[0]) + 1;
+	guess = rand() % strlen(arr) ;
 	//8 bits
 	strcpy_s(arr, msgErr(arr, 8, guess));
 	cout << arr << endl;
 	b = compress(arr);
 	d = &b[0];
-	ret = chkSum(d, sizeof(b) / sizeof(b[0]));
-	cout << "Checksum: " << ret << endl;
+	ret = chkSum(d, b.size());
+	cout << "Checksum: " << hex << ret << endl;
 
 
 
@@ -120,17 +136,19 @@ vector<unsigned short> compress(char * a)
 {
 
 	vector<unsigned short> b;
-
-	for (int i = 0; i < strlen(a) / 2; i++)
+	
+	for (int i = 0; i <= strlen(a) / 2; i++)
 	{
-		unsigned short t1, t2;
-		t1 = a[i + i];
-		t2 = a[i + i + 1];
-		//Shift
-		t1 << 8;
-		t1 |= t2;
+		unsigned short s1;
+		char c1, c2;
+		c1 = a[2*i];
+		c2 = a[2*i + 1];
 
-		b.push_back(t1);
+		//Shift
+		s1 = (c1 << 8) | c2;
+			
+
+		b.push_back(s1);
 
 	}
 
