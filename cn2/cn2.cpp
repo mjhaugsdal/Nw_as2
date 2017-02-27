@@ -1,12 +1,14 @@
 // cn2.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include <bitset>
 #include <vector>
+#include <cstring>
+
 
 using namespace std;
 
@@ -37,8 +39,9 @@ int main()
 	/*for (int i = 0; i < b.size() ; i++)
 		cout << b[i] << endl;*/
 
-	cout << "This program will take the following message: ";
-	cout << arr << endl;
+	system("clear");
+	cout << "This program will take the following message: " << endl;
+	cout << "\""<<  arr << "\"" << endl;
 	cout << "And do the following operations: " << endl;
 	
 	cout << "1. Compress 2 and 2 characters to single unsigned shorts" << endl;
@@ -63,12 +66,12 @@ int main()
 	//cout << guess << endl;
 
 
-
+	//cout << arr
 	guess = rand() % strlen(arr) ;
 	//cout << arr[guess] << endl;
 	//Alter one bit, randomly
 
-	strcpy_s(arr, msgErr(arr, 1, guess));
+	strcpy	(arr, msgErr(arr, 1, guess));
 	cout << arr << endl;
 	b = compress(arr);
 
@@ -87,7 +90,7 @@ int main()
 	//Pick a number randomly
 	guess = rand() % strlen(arr) ;
 	//3 bits
-	strcpy_s(arr, msgErr(arr, 3, guess));
+	strcpy(arr, msgErr(arr, 3, guess));
 	cout << arr << endl;
 	b = compress(arr);
 	d = &b[0];
@@ -99,7 +102,7 @@ int main()
 	//Pick a number randomly
 	guess = rand() % strlen(arr) ;
 	//8 bits
-	strcpy_s(arr, msgErr(arr, 8, guess));
+	strcpy(arr, msgErr(arr, 8, guess));
 	cout << arr << endl;
 	b = compress(arr);
 	d = &b[0];
