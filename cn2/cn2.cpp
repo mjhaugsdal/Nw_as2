@@ -120,7 +120,8 @@ char * msgErr(char * arr, int bit, int guess)
 
 	for (int i = 0; i < bit; i++)
 	{
-		set.flip(i);
+		int flip = rand() % 8;
+		set.flip(flip);
 	}
 
 	unsigned long i = set.to_ulong();
