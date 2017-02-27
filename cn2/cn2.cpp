@@ -1,7 +1,7 @@
 // cn2.cpp : Defines the entry point for the console application.
 //
 
-//#include "stdafx.h"
+#include "stdafx.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -39,9 +39,8 @@ int main()
 	/*for (int i = 0; i < b.size() ; i++)
 		cout << b[i] << endl;*/
 
-	system("clear");
-	cout << "This program will take the following message: " << endl;
-	cout << "\""<<  arr << "\"" << endl;
+	cout << "This program will take the following message: ";
+	cout << arr << endl;
 	cout << "And do the following operations: " << endl;
 	
 	cout << "1. Compress 2 and 2 characters to single unsigned shorts" << endl;
@@ -54,7 +53,7 @@ int main()
 	//Message without altering
 	b = compress(arr);
 	unsigned short * d = &b[0];
-	ret = chkSum(d, b.size());
+	ret = chkSum(d, b.size()-1);
 	cout << "Checksum of original message:  " << hex << ret << endl;
 
 	/*
@@ -71,7 +70,7 @@ int main()
 	//cout << arr[guess] << endl;
 	//Alter one bit, randomly
 
-	strcpy	(arr, msgErr(arr, 1, guess));
+	strcpy_s(arr, msgErr(arr, 1, guess));
 	cout << arr << endl;
 	b = compress(arr);
 
@@ -81,7 +80,7 @@ int main()
 	//cout << d << endl;
 	//cout << b << endl;
 	
-	ret = chkSum(d, b.size());
+	ret = chkSum(d, b.size()-1);
 	cout << "Checksum: " << hex << ret << endl;
 
 
@@ -90,11 +89,11 @@ int main()
 	//Pick a number randomly
 	guess = rand() % strlen(arr) ;
 	//3 bits
-	strcpy(arr, msgErr(arr, 3, guess));
+	strcpy_s(arr, msgErr(arr, 3, guess));
 	cout << arr << endl;
 	b = compress(arr);
 	d = &b[0];
-	ret = chkSum(d, b.size());
+	ret = chkSum(d, b.size()-1);
 	cout << "Checksum: " << hex << ret << endl;
 
 
@@ -102,11 +101,11 @@ int main()
 	//Pick a number randomly
 	guess = rand() % strlen(arr) ;
 	//8 bits
-	strcpy(arr, msgErr(arr, 8, guess));
+	strcpy_s(arr, msgErr(arr, 8, guess));
 	cout << arr << endl;
 	b = compress(arr);
 	d = &b[0];
-	ret = chkSum(d, b.size());
+	ret = chkSum(d, b.size()-1);
 	cout << "Checksum: " << hex << ret << endl;
 
 
